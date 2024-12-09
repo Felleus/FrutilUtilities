@@ -1,0 +1,17 @@
+name: FrutilUtilities
+version: '1.1'
+main: com.fsd.FrutilUtilities
+api-version: '1.20'
+prefix: fsd
+authors: [ FSD ]
+description: FSD Plugin
+website: felleusdev.com
+commands:
+  fsdcdamage:
+    description: Устанавливает урон от эндер кристала
+    usage: /<command> [урон]
+    permission: frutilutilities.command.fsdcdamage
+permissions:
+  frutilutilities.command.fsdcdamage:
+    description: Позволяет использовать команду /fsdcdamage
+    default: op
