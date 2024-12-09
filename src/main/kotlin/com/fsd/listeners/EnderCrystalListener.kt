@@ -12,21 +12,26 @@ class EnderCrystalListener(private val plugin: FrutilUtilities) : Listener {
     @EventHandler
     fun onEnderCrystalDamage(event: EntityDamageByEntityEvent) {
         if (event.damager !is EnderCrystal) return
-
         if (event.entity !is Player) return
 
         val player = event.entity as Player
         val enderCrystal = event.damager as EnderCrystal
-        val location = enderCrystal.location
-        val distance = location.distance(player.location)
+        val crystalLocation = enderCrystal.location
+        val playerLocation = player.location
+
+        if (playerLocation.blockY == crystalLocation.blockY - 1) {
+            event.damage = 0.0
+            return
+        }
+
+        val distance = crystalLocation.distance(playerLocation)
         val damageReduction = (distance / 2)
         val finalDamage = (plugin.damage - damageReduction).coerceAtLeast(0.0)
 
         if (finalDamage > 0) {
             event.damage = finalDamage
-            player.sendMessage("§cВы получили $finalDamage урона от эндер кристалла.")
         } else {
-            event.isCancelled = true
+            event.damage = 0.0
             player.sendMessage("§cУрон от эндер кристалла не был нанесён (слишком далеко).")
         }
     }
