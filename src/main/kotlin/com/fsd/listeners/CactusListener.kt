@@ -11,7 +11,7 @@ class CactusListener : Listener {
     fun onEntityDamageByBlock(event: EntityDamageByBlockEvent) {
         val damagerBlock = event.damager
         if (damagerBlock != null) {
-            if (damagerBlock.type == Material.STONE) {
+            if (damagerBlock.type == Material.GLASS) {
                 if (event.entity is org.bukkit.entity.Item) {
                     event.isCancelled = true
                 }
